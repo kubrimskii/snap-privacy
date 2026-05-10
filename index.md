@@ -10,7 +10,7 @@ Snap is a private Chrome extension built for use inside the Google Workspace org
 
 ## 1. Who we are
 
-Snap is published and maintained by employees of nace.ai for internal bug-reporting use only. Contact: support@nace.ai.
+Snap is published and maintained by employees of nace.ai for internal bug-reporting use only. Contact: rimma@nace.ai.
 
 ## 2. Single purpose
 
@@ -54,8 +54,6 @@ We do not sell, rent, or share user data with third parties. We do not use your 
 - `storage` — save your drafts and preferences locally.
 - `identity` — perform Google sign-in via `launchWebAuthFlow`.
 - `scripting` — inject the drawing overlay into the active tab on click.
-- `tabs` — read the active tab's URL/title and capture its visible viewport.
-- `<all_urls>` — required so the user can file a bug report from any page they visit. Content access is gated by the user's explicit click on the toolbar icon.
 - `https://www.googleapis.com/*`, `https://docs.googleapis.com/*` — needed to call Google Drive and Google Docs APIs.
 
 ## 8. Remote code
