@@ -1,0 +1,40 @@
+edit @README.md , add info about the snap project
+
+---
+
+if i want my team to use entire, are they supposed to intstall entire themselves? or i can confure in git repo and it will work with them too.
+
+---
+
+why entire activity says '@/Users/kubrimskii/.cursor/projects/Users-kubrimskii-projects-snap-privacy/terminals/2.txt:8-13 '
+if i just pushed commit using cursor?
+
+---
+
+do it '
+Let me check the actual state — whether a checkpoint exists at all versus this being a hosted-account view issue.
+
+Co-authored-by: Cursor <cursoragent@cursor.com>
+
+a40ad5c edit reade
+
+03d0284 add entire config
+{"time":"2026-08-12T15:39:36.631218+05:00","level":"INFO","msg":"turn-end","session_id":"7960bc4e-a5a1-4ed0-b1ed-45f551b102dd","component":"lifecycle","agent":"cursor","event":"TurnEnd","session_id":"7960bc4e-a5a1-4ed0-b1ed-45f551b102dd","session_ref":"/Users/kubrimskii/.cursor/projects/Users-kubrimskii-projects-snap-privacy/agent-transcripts/7960bc4e-a5a1-4ed0-b1ed-45f551b102dd/7960bc4e-a5a1-4ed0-b1ed-45f551b102dd.jsonl","model":"claude-opus-5-thinking-high"}
+{"time":"2026-08-12T15:39:36.634409+05:00","level":"INFO","msg":"no files modified during session, skipping checkpoint","session_id":"7960bc4e-a5a1-4ed0-b1ed-45f551b102dd","component":"lifecycle","agent":"cursor"}
+{"time":"2026-08-12T15:39:36.644094+05:00","level":"INFO","msg":"phase transition","session_id":"7960bc4e-a5a1-4ed0-b1ed-45f551b102dd","component":"session","agent":"cursor","session_id":"7960bc4e-a5a1-4ed0-b1ed-45f551b102dd","event":"TurnEnd","from":"active","to":"idle"}
+{"time":"2026-08-12T15:40:47.298165+05:00","level":"INFO","msg":"turn-start","session_id":"7960bc4e-a5a1-4ed0-b1ed-45f551b102dd","component":"lifecycle","agent":"cursor","event":"TurnStart","session_id":"7960bc4e-a5a1-4ed0-b1ed-45f551b102dd","session_ref":"/Users/kubrimskii/.cursor/projects/Users-kubrimskii-projects-snap-privacy/agent-transcripts/7960bc4e-a5a1-4ed0-b1ed-45f551b102dd/7960bc4e-a5a1-4ed0-b1ed-45f551b102dd.jsonl","model":"claude-opus-5-thinking-high"}
+{"time":"2026-08-12T15:40:47.331147+05:00","level":"INFO","msg":"phase transition","session_id":"7960bc4e-a5a1-4ed0-b1ed-45f551b102dd","component":"session","agent":"cursor","session_id":"7960bc4e-a5a1-4ed0-b1ed-45f551b102dd","event":"TurnStart","from":"idle","to":"active"}
+> "why entire activity says '@/Users/kubrimskii/.cursor/proj..."
+active · started 19m ago · active now
+
+────────────────────────────────────────────────────────────
+1 session
+Because that commit has no checkpoint attached — entire checkpoint list still reports 0 for this branch, so there's genuinely nothing for the dashboard to count. The push succeeded as a normal Git push; it just carried no Entire data.
+
+The logs show exactly why. Your session started at 15:21, when claude-code was the only installed agent, so Entire opened the session owned by Claude Code. When I installed the Cursor hooks mid-session, the first Cursor hook to fire at 15:37 was rejected: skipping forwarded hook for non-owning agent (owning_agent: Claude Code, firing_agent: Cursor). Ownership only transferred on the next turn at 15:38, where the log reads corrected session agent type from transcript path ... from: Claude Code, to: Cursor. The commit 55aff47 landed inside that gap, which is why it has only a Co-authored-by: Cursor trailer and no Entire-Checkpoint trailer.
+
+Two other things kept it empty. Since that handoff, the one completed turn logged no files modified during session, skipping checkpoint — Entire won't create a checkpoint for a turn that only reads and answers questions. And I made that commit through a non-interactive shell, so the "Link this commit to session context?" prompt never appeared.
+
+Separately, entire activity is a hosted view: it displays "your activity overview, repository breakdown, and recent sessions from entire.io." This repo's checkpoints are configured for local git-refs storage and it isn't connected to an Entire project or mirror, so even once checkpoints exist locally, that dashboard will likely stay at zero until the repo is linked to entire.io. Use entire checkpoint list and entire status for the local picture.
+
+The good news is the plumbing now works: entire status shows the session correctly attributed as Cursor (claude-opus-5-thinking-high) · active now. To'
