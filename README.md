@@ -1,5 +1,5 @@
 # snap-privacy
 
-Public privacy policy for the Snap Chrome extension.
+Public privacy policy for **Snap**, a Chrome extension used inside the nace.ai Google Workspace for internal bug reporting: annotate a page, capture the viewport, and append the result to a Google Doc.
 
-Published via GitHub Pages at the repo's Pages URL.
+This repository hosts that policy and publishes it via GitHub Pages.
